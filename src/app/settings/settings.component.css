@@ -1,0 +1,15 @@
+div{
+  font-family: Roboto Condensed;
+}
+
+.page-container{
+  margin: 10px 20% 5px 10%;
+}
+
+.radioButtonWrapped{
+  display: flex;
+  justify-content: flex-start;
+}
+
+
+

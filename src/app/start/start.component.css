@@ -1,0 +1,56 @@
+.calorieHeader{
+  display: flex;
+  justify-content: center;
+  font-family: Risque;
+  margin-top: 50px;
+  font-size: 40px;
+  line-height: 58px;
+  color: #799CF4;
+}
+
+.subtitle{
+  display: flex;
+  justify-content: center;
+  font-family: Roboto Condensed;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 65px;
+}
+
+.girlLogo{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+
+.signInBlock{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  margin-top: 20px;
+  outline: none;
+}
+
+.googleItem{
+  border: 1px solid #799CF4;
+  width: 49px;
+  height: 49px;
+  background: white;
+}
+
+.googleLogo{
+  width: 100%;
+}
+
+.signInText{
+  border: 1px solid #799CF4;
+  padding: 7px;
+  font-family: Roboto Condensed;
+  font-size: 24px;
+  line-height: 33px;
+  color: #FFFFFF;
+  background: #799CF4;
+}

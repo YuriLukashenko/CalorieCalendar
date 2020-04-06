@@ -1,0 +1,31 @@
+<div>
+  <img class="girl-global-logo" src="assets/logo.png">
+  <div class="cancel-global" [routerLink]="'/dashboard'">Cancel</div>
+  <div class="title-global">New meal</div>
+  <div class="page-container">
+    <div class="labels-global">Title</div>
+    <input type="text" class="text-input-global" [(ngModel)]="newMeal.title">
+    <div class="d-flex justify-content-between">
+      <div>
+        <div class="labels-global">Kcal</div>
+        <input type="text" class="text-input-global" [(ngModel)]="newMeal.kcal">
+      </div>
+      <div class="ml-4">
+        <div class="labels-global">Time</div>
+        <input type="text" class="text-input-global" [(ngModel)]="newMeal.time">
+      </div>
+    </div>
+    <div class="labels-global">Fats (gm)</div>
+    <input type="text" class="text-input-global" [(ngModel)]="newMeal.fats">
+    <div class="labels-global">Proteins (gm)</div>
+    <input type="text" class="text-input-global" [(ngModel)]="newMeal.proteins">
+    <div class="labels-global">Carbohydrates (gm)</div>
+    <input type="text" class="text-input-global" [(ngModel)]="newMeal.carbs">
+    <div class="labels-global">Add photo</div>
+    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+    <img class="imagePlaceholder mt-1" src="assets/Rectangle.png">
+    <div class="d-flex justify-content-center mt-1">
+      <button class="btn btn-primary button-global-style" (click)="onAddMeal()">Add meal</button>
+    </div>
+  </div>
+</div>
