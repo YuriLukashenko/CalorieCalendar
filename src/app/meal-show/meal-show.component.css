@@ -1,0 +1,16 @@
+div{
+  font-family: Roboto Condensed;
+}
+
+.page-container{
+  margin: 10px 20% 5px 10%;
+}
+
+.values{
+  padding: 2vh 0 3vh 0;
+  font-weight: bold;
+}
+
+.imagePlaceholder{
+  width:100%;
+}

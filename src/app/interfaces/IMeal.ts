@@ -1,11 +1,10 @@
-import {Time} from '@angular/common';
-
 export interface IMeal {
   id: number;
   title: string;
   kcal: number;
   date: string;
-  time: Time;
+  dayOfWeek: string;
+  time: string;
   fats: number;
   proteins: number;
   carbs: number;

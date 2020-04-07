@@ -6,7 +6,7 @@
   </div>
   <div class="leftBlock">
     <img class="gearLogo" src="assets/dashboard-logo.svg" [routerLink]="'/settings'">
-    <select class="selectMonth" [(ngModel)]="currentMonth">
+    <select class="selectMonth" [(ngModel)]="currentMonthName">
       <option disabled>August</option>
       <option value="January">January</option>
       <option value="February">February</option>
@@ -46,13 +46,13 @@
       <div class="totalCalories">1350</div>
     </div>
     <div class="d-flex">
-      <div class="number-of-day">5</div>
-      <div class="number-of-day">6</div>
-      <div class="number-of-day">7</div>
-      <div class="number-of-day">8</div>
-      <div class="number-of-day">9</div>
-      <div class="number-of-day">10</div>
-      <div class="number-of-day">11</div>
+      <div class="number-of-day">{{weekNums[0]}}</div>
+      <div class="number-of-day">{{weekNums[1]}}</div>
+      <div class="number-of-day">{{weekNums[2]}}</div>
+      <div class="number-of-day">{{weekNums[3]}}</div>
+      <div class="number-of-day">{{weekNums[4]}}</div>
+      <div class="number-of-day">{{weekNums[5]}}</div>
+      <div class="number-of-day">{{weekNums[6]}}</div>
     </div>
     <div class="d-flex">
       <div class="name-of-day">Mon</div>
@@ -63,113 +63,127 @@
       <div class="name-of-day">Sat</div>
       <div class="name-of-day">Sun</div>
     </div>
-    <div class="d-flex mt-3">
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
+    <div class="d-flex flex-row">
+      <div class="d-flex flex-column mt-3 dayBlock">
+        <app-meal class="day" *ngFor="let item of monday" [meal]="item.meal" [isExist]="item.isExist"></app-meal>
+      </div>
+      <div class="d-flex flex-column mt-3 dayBlock">
+        <app-meal class="day" *ngFor="let item of tuesday" [meal]="item.meal" [isExist]="item.isExist"></app-meal>
+      </div>
+      <div class="d-flex flex-column mt-3 dayBlock">
+        <app-meal class="day" *ngFor="let item of wednesday" [meal]="item.meal" [isExist]="item.isExist"></app-meal>
+      </div>
+      <div class="d-flex flex-column mt-3 dayBlock">
+        <app-meal class="day" *ngFor="let item of thursday" [meal]="item.meal" [isExist]="item.isExist"></app-meal>
+      </div>
+      <div class="d-flex flex-column mt-3 dayBlock">
+        <app-meal class="day" *ngFor="let item of friday" [meal]="item.meal" [isExist]="item.isExist"></app-meal>
+      </div>
+      <div class="d-flex flex-column mt-3 dayBlock">
+        <app-meal class="day" *ngFor="let item of saturday" [meal]="item.meal" [isExist]="item.isExist"></app-meal>
+      </div>
+      <div class="d-flex flex-column mt-3 dayBlock">
+        <app-meal class="day" *ngFor="let item of sunday" [meal]="item.meal" [isExist]="item.isExist"></app-meal>
+      </div>
     </div>
-    <div class="d-flex">
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-    </div>
-    <div class="d-flex">
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-    </div>
-    <div class="d-flex">
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-    </div>
-    <div class="d-flex">
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-    </div>
-    <div class="d-flex">
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-    </div>
-    <div class="d-flex">
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-    </div>
-    <div class="d-flex">
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-    </div>
-    <div class="d-flex">
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-    </div>
-    <div class="d-flex">
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-    </div>
-    <div class="d-flex">
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-    </div>
-    <div class="d-flex">
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-    </div>
+      <!--    <div class="d-flex">-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--    </div>-->
+<!--    <div class="d-flex">-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--    </div>-->
+<!--    <div class="d-flex">-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--    </div>-->
+<!--    <div class="d-flex">-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--    </div>-->
+<!--    <div class="d-flex">-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--    </div>-->
+<!--    <div class="d-flex">-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--    </div>-->
+<!--    <div class="d-flex">-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--    </div>-->
+<!--    <div class="d-flex">-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--    </div>-->
+<!--    <div class="d-flex">-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--    </div>-->
+<!--    <div class="d-flex">-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--    </div>-->
+<!--    <div class="d-flex">-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--      <div class="day"></div>-->
+<!--    </div>-->
   </div>
 </div>

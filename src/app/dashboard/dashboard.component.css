@@ -61,11 +61,15 @@
 }
 
 .day{
-  float: left;
+  float: top;
   flex-basis: 0;
   flex-grow: 1;
-  height: 7vh;
+  width: 10vw;
   border: 1px solid #D8D5D5;
+}
+
+.dayBlock{
+  height: 85vh;
 }
 
 .ellipse{

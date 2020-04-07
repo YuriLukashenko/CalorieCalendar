@@ -2,12 +2,13 @@ import {Injectable} from '@angular/core';
 import {LocalStorageService} from './local-storage.service';
 import {IMeal} from '../interfaces/IMeal';
 import * as moment from 'moment';
+import {DashboardService} from './dashboard.service';
 
 @Injectable()
 export class MealService {
   private _mealCount: number;
 
-  constructor(private localStorageService: LocalStorageService) {
+  constructor(private localStorageService: LocalStorageService, private dashboardService: DashboardService) {
     const tempMealCount = this.localStorageService.itemFromLocalStorage('mealCount');
     this._mealCount = tempMealCount != null ? tempMealCount : 0;
 
@@ -23,6 +24,7 @@ export class MealService {
       kcal: null,
       time: null,
       date: new Date().toJSON().slice(0, 10),
+      dayOfWeek: moment().format('dddd'),
       carbs: null,
       fats: null,
       photoPath: '',
@@ -42,5 +44,28 @@ export class MealService {
   addMeal(meal: IMeal) {
     this.localStorageService.itemToLocalStorage(meal, 'meal_' + meal.id);
     this.mealCount ++;
+  }
+
+  getAllMeals(): IMeal[] {
+    const allMeals: IMeal[] = [];
+    for (let i = 1; i <= this.mealCount; i++) {
+      const item = this.localStorageService.itemFromLocalStorage('meal_' + i);
+      if (item !== null) {
+        allMeals.push(item);
+      }
+    }
+    return allMeals;
+  }
+
+  getAllMealsForCurrentWeek(): IMeal[] {
+    console.log(this.dashboardService.lastDay, this.dashboardService.firstDay);
+    const allMeals: IMeal[] = [];
+    for (let i = 1; i <= this.mealCount; i++) {
+      const item = this.localStorageService.itemFromLocalStorage('meal_' + i);
+      if (item !== null && moment(item.date).isBetween(this.dashboardService.firstDay, this.dashboardService.lastDay, 'days', '[]')) {
+        allMeals.push(item);
+      }
+    }
+    return allMeals;
   }
 }

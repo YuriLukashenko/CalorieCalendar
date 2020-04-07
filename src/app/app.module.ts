@@ -11,6 +11,9 @@ import {SettingsService} from './services/settings.service';
 import {FormsModule} from '@angular/forms';
 import {MealService} from './services/meal.service';
 import {LocalStorageService} from './services/local-storage.service';
+import {DashboardService} from './services/dashboard.service';
+import {MealComponent} from './meal/meal.component';
+import { MealShowComponent } from './meal-show/meal-show.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,9 @@ import {LocalStorageService} from './services/local-storage.service';
     StartComponent,
     DashboardComponent,
     SettingsComponent,
-    NewMealComponent
+    NewMealComponent,
+    MealComponent,
+    MealShowComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +33,8 @@ import {LocalStorageService} from './services/local-storage.service';
   providers: [
     LocalStorageService,
     SettingsService,
-    MealService
+    MealService,
+    DashboardService
   ],
   bootstrap: [AppComponent]
 })

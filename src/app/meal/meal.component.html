@@ -1,0 +1,5 @@
+<div class="mealContainer" *ngIf="isExist" [routerLink]="'/meal-show'" [queryParams]="{meal: meal | json}">
+  <div class="title">{{meal?.title}}</div>
+  <div class="calories">{{meal?.kcal}}</div>
+</div>
+
