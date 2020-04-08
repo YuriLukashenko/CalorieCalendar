@@ -3,6 +3,10 @@ import * as moment from 'moment';
 import {DashboardService} from '../services/dashboard.service';
 import {IMeal} from '../interfaces/IMeal';
 import {MealService} from '../services/meal.service';
+import {IDay} from '../interfaces/IDay';
+import {ITotal} from '../interfaces/ITotal';
+import {SettingsService} from '../services/settings.service';
+import {ISettings} from '../interfaces/ISettings';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,78 +15,115 @@ import {MealService} from '../services/meal.service';
 })
 export class DashboardComponent implements OnInit {
   currentMonthName: string;
+  currentDayNum: number;
   weekNums: number[] = [];
   meals: IMeal[] = [];
-  monday: {meal: IMeal, isExist: boolean}[] = [];
-  tuesday: {meal: IMeal, isExist: boolean}[] = [];
-  wednesday: {meal: IMeal, isExist: boolean}[] = [];
-  thursday: {meal: IMeal, isExist: boolean}[] = [];
-  friday: {meal: IMeal, isExist: boolean}[] = [];
-  saturday: {meal: IMeal, isExist: boolean}[] = [];
-  sunday: {meal: IMeal, isExist: boolean}[] = [];
+  monday: IDay[] = [];
+  tuesday: IDay[] = [];
+  wednesday: IDay[] = [];
+  thursday: IDay[] = [];
+  friday: IDay[] = [];
+  saturday: IDay[] = [];
+  sunday: IDay[] = [];
+  totalSummary: ITotal[] = [];
+  setting: ISettings;
 
-  constructor(private dashboardService: DashboardService, private mealService: MealService) {
+  constructor(private dashboardService: DashboardService, private mealService: MealService, private settingsService: SettingsService) {
     this.clearDays();
     this.currentMonthName = moment().format('MMMM');
+    this.currentDayNum = +moment().format('D');
   }
 
   ngOnInit(): void {
     this.weekNums = this.dashboardService.getCurrentWeek();
     this.meals = this.mealService.getAllMealsForCurrentWeek();
+    this.setting = this.settingsService.setting;
+
+    let index = 0;
     for (const meal of this.meals) {
       switch (meal.dayOfWeek) {
         case 'Monday':
-          this.monday[this.getMealOffset(meal)].meal = meal;
-          this.monday[this.getMealOffset(meal)].isExist = true;
+          index = this.getMealOffset(meal);
+          this.monday[index] = {meal, isExist: true};
+          this.incrementTotalValues(meal, 0);
           break;
         case 'Tuesday':
-          this.tuesday[this.getMealOffset(meal)].meal = meal;
-          this.tuesday[this.getMealOffset(meal)].isExist = true;
+          index = this.getMealOffset(meal);
+          this.tuesday[index] = {meal, isExist: true};
+          this.incrementTotalValues(meal, 1);
           break;
         case 'Wednesday':
-          this.wednesday[this.getMealOffset(meal)].meal = meal;
-          this.wednesday[this.getMealOffset(meal)].isExist = true;
+          index = this.getMealOffset(meal);
+          this.wednesday[index] = {meal, isExist: true};
+          this.incrementTotalValues(meal, 2);
           break;
-        case 'Thursday':
-          this.thursday[this.getMealOffset(meal)].meal = meal;
-          this.thursday[this.getMealOffset(meal)].isExist = true;
+        case'Thursday':
+          index = this.getMealOffset(meal);
+          this.thursday[index] = {meal, isExist: true};
+          this.incrementTotalValues(meal, 3);
           break;
-        case 'Friday':
-          this.friday[this.getMealOffset(meal)].meal = meal;
-          this.friday[this.getMealOffset(meal)].isExist = true;
+        case'Friday':
+          index = this.getMealOffset(meal);
+          this.friday[index] = {meal, isExist: true};
+          this.incrementTotalValues(meal, 4);
           break;
-        case 'Saturday':
-          this.saturday[this.getMealOffset(meal)].meal = meal;
-          this.saturday[this.getMealOffset(meal)].isExist = true;
+        case'Saturday':
+          index = this.getMealOffset(meal);
+          this.saturday[index] = {meal, isExist: true};
+          this.incrementTotalValues(meal, 5);
           break;
-        case 'Sunday':
-          this.sunday[this.getMealOffset(meal)].meal = meal;
-          this.sunday[this.getMealOffset(meal)].isExist = true;
+        case'Sunday':
+          index = this.getMealOffset(meal);
+          this.sunday[index] = {meal, isExist: true};
+          this.incrementTotalValues(meal, 6);
           break;
         default:
           break;
       }
     }
+    console.log(this.totalSummary);
   }
 
   clearDays() {
+    const defaultDay: IDay = {
+      meal: null,
+      isExist: false,
+    };
+    const defaultTotal: ITotal = {
+      totalKcal: 0,
+      totalFats: 0,
+      totalProts: 0,
+      totalCarbs: 0
+    };
+    // 12 parts of day from 08:00 to 20:00
     for (let i = 0; i < 12; i++) {
-      this.monday.push({ meal: null, isExist: false});
-      this.tuesday.push({ meal: null, isExist: false});
-      this.wednesday.push({ meal: null, isExist: false});
-      this.thursday.push({ meal: null, isExist: false});
-      this.friday.push({ meal: null, isExist: false});
-      this.saturday.push({ meal: null, isExist: false});
-      this.sunday.push({ meal: null, isExist: false});
+      this.monday.push(Object.assign({}, defaultDay));
+      this.tuesday.push(Object.assign({}, defaultDay));
+      this.wednesday.push(Object.assign({}, defaultDay));
+      this.thursday.push(Object.assign({}, defaultDay));
+      this.friday.push(Object.assign({}, defaultDay));
+      this.saturday.push(Object.assign({}, defaultDay));
+      this.sunday.push(Object.assign({}, defaultDay));
+    }
+    // 7 days
+    for (let i = 0; i < 7; i++) {
+      this.totalSummary.push(Object.assign({}, defaultTotal));
     }
   }
 
-  getMealOffset(meal: IMeal): number {
+  private getMealOffset(meal: IMeal): number {
     const hours = + meal?.time.split(':')[0] ?? 0;
     if (hours < 8 && hours > 19) {
       return -1;
     } else {
       return hours - 8;
     }
+  }
+
+  private incrementTotalValues(meal: IMeal, dayOfWeek: number) {
+    this.totalSummary[dayOfWeek].totalKcal += (+meal?.kcal) ?? 0;
+    this.totalSummary[dayOfWeek].totalFats += (+meal?.fats) ?? 0;
+    this.totalSummary[dayOfWeek].totalProts += (+meal?.proteins) ?? 0;
+    this.totalSummary[dayOfWeek].totalCarbs += (+meal?.carbs) ?? 0;
   }
 }

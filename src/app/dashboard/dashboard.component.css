@@ -85,3 +85,23 @@
   right: 30px;
   z-index: 5;
 }
+
+.today{
+  background: #799CF4;
+  color: white;
+  border-radius: 50%;
+  padding: 0 5px;
+}
+
+.allGood{
+  color: #799CF4;
+}
+
+.shortage{
+  color: #F5D45E;
+}
+
+.overkill{
+  color: #F47981;
+}
+
