@@ -22,8 +22,8 @@ export class DashboardService {
     this._lastDay = lastDay;
   }
 
-  getCurrentWeek(): number[] {
-    let weekNums: number[] = [];
+  getCurrentWeek(): {day: number, month: string}[] {
+    let weekNums: {day: number, month: string}[] = [];
     let dayOfWeek = moment().format('dddd');
     let now: moment.Moment;
     switch (dayOfWeek) {
@@ -50,7 +50,10 @@ export class DashboardService {
         break;
     }
     for (let i = 0; i < 7; i++) {
-      weekNums.push(+now.add(1, 'days').format('D'));
+      weekNums.push({
+        day: +now.add(1, 'days').format('D'),
+        month: now.format('MMMM')
+      });
       if (i === 0) {
         this.firstDay = now.format('YYYY-MM-DD');
       }

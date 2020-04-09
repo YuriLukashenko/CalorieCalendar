@@ -1,0 +1,32 @@
+div{
+  font-family: Roboto Condensed;
+}
+
+.page-container{
+  margin: 10px 20% 5px 10%;
+}
+
+.values{
+  padding: 2vh 0;
+  font-weight: bold;
+}
+
+.meal-block{
+  background: #799CF4;
+  color: white;
+  width: 70%;
+  margin-bottom: 2vh;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 2px 5px;
+  height: 7vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.meal-info{
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}

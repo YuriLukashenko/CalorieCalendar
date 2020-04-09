@@ -14,6 +14,7 @@ import {LocalStorageService} from './services/local-storage.service';
 import {DashboardService} from './services/dashboard.service';
 import {MealComponent} from './meal/meal.component';
 import { MealShowComponent } from './meal-show/meal-show.component';
+import { SummaryComponent } from './summary/summary.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MealShowComponent } from './meal-show/meal-show.component';
     SettingsComponent,
     NewMealComponent,
     MealComponent,
-    MealShowComponent
+    MealShowComponent,
+    SummaryComponent
   ],
   imports: [
     BrowserModule,

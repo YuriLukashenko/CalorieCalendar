@@ -7,6 +7,8 @@ import {IDay} from '../interfaces/IDay';
 import {ITotal} from '../interfaces/ITotal';
 import {SettingsService} from '../services/settings.service';
 import {ISettings} from '../interfaces/ISettings';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ISummary} from '../interfaces/ISummary';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +18,7 @@ import {ISettings} from '../interfaces/ISettings';
 export class DashboardComponent implements OnInit {
   currentMonthName: string;
   currentDayNum: number;
-  weekNums: number[] = [];
+  week: {day: number, month: string}[] = [];
   meals: IMeal[] = [];
   monday: IDay[] = [];
   tuesday: IDay[] = [];
@@ -28,14 +30,18 @@ export class DashboardComponent implements OnInit {
   totalSummary: ITotal[] = [];
   setting: ISettings;
 
-  constructor(private dashboardService: DashboardService, private mealService: MealService, private settingsService: SettingsService) {
+  constructor(private dashboardService: DashboardService,
+              private mealService: MealService,
+              private settingsService: SettingsService,
+              private route: ActivatedRoute,
+              private router: Router) {
     this.clearDays();
     this.currentMonthName = moment().format('MMMM');
     this.currentDayNum = +moment().format('D');
   }
 
   ngOnInit(): void {
-    this.weekNums = this.dashboardService.getCurrentWeek();
+    this.week = this.dashboardService.getCurrentWeek();
     this.meals = this.mealService.getAllMealsForCurrentWeek();
     this.setting = this.settingsService.setting;
 
@@ -125,5 +131,29 @@ export class DashboardComponent implements OnInit {
     this.totalSummary[dayOfWeek].totalFats += (+meal?.fats) ?? 0;
     this.totalSummary[dayOfWeek].totalProts += (+meal?.proteins) ?? 0;
     this.totalSummary[dayOfWeek].totalCarbs += (+meal?.carbs) ?? 0;
+  }
+
+  onSelectDay(index: number) {
+    const summary: ISummary = {
+      title: this.week[index].day === this.currentDayNum
+        ? 'Today'
+        : this.week[index].month + ' ' + this.week[index].day,
+      totalValues: this.totalSummary[index],
+      mealsOfDay: null
+    };
+    switch (index) {
+      case 0: summary.mealsOfDay = this.monday; break;
+      case 1: summary.mealsOfDay = this.tuesday; break;
+      case 2: summary.mealsOfDay = this.wednesday; break;
+      case 3: summary.mealsOfDay = this.thursday; break;
+      case 4: summary.mealsOfDay = this.friday; break;
+      case 5: summary.mealsOfDay = this.saturday; break;
+      case 6: summary.mealsOfDay = this.sunday; break;
+    }
+    this.router.navigate(['/summary'], {
+      queryParams: {
+        summary: JSON.stringify(summary)
+      }
+    });
   }
 }

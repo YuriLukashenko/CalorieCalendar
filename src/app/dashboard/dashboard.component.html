@@ -48,20 +48,20 @@
       </div>
     </div>
     <div class="d-flex">
-      <div class="number-of-day" *ngFor="let weekNum of weekNums">
-        <div [ngClass]="weekNum === currentDayNum? 'today':''">
-          {{weekNum}}
+      <div class="number-of-day" *ngFor="let item of week; let i=index">
+        <div [ngClass]="item.day === currentDayNum? (item.day >= 10? 'today2digits' : 'today') :''" (click)="onSelectDay(i)">
+          {{item.day}}
         </div>
       </div>
     </div>
     <div class="d-flex">
-      <div class="name-of-day">Mon</div>
-      <div class="name-of-day">Tue</div>
-      <div class="name-of-day">Wed</div>
-      <div class="name-of-day">Thu</div>
-      <div class="name-of-day">Fri</div>
-      <div class="name-of-day">Sat</div>
-      <div class="name-of-day">Sun</div>
+      <div class="name-of-day" (click)="onSelectDay(0)">Mon</div>
+      <div class="name-of-day" (click)="onSelectDay(1)">Tue</div>
+      <div class="name-of-day" (click)="onSelectDay(2)">Wed</div>
+      <div class="name-of-day" (click)="onSelectDay(3)">Thu</div>
+      <div class="name-of-day" (click)="onSelectDay(4)">Fri</div>
+      <div class="name-of-day" (click)="onSelectDay(5)">Sat</div>
+      <div class="name-of-day" (click)="onSelectDay(6)">Sun</div>
     </div>
     <div class="d-flex flex-row">
       <div class="d-flex flex-column mt-3 dayBlock">

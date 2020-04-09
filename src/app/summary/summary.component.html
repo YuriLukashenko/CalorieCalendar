@@ -1,0 +1,53 @@
+<div>
+  <img class="girl-global-logo" src="assets/logo.png">
+  <div class="cancel-global" [routerLink]="'/dashboard'">Back</div>
+  <div class="title-global">{{summary.title}}</div>
+  <div class="page-container">
+    <div class="labels-global">Kcal</div>
+    <div class="labels-global values" [ngClass]="summary.totalValues.totalKcal < limitFromSettings.minKcal
+                                                 ? 'shortage'
+                                                 : (summary.totalValues.totalKcal <= limitFromSettings.maxKcal
+                                                    ? 'allGood'
+                                                    : 'overkill')">
+      {{summary.totalValues.totalKcal}} / {{limitCalories}}
+    </div>
+    <div class="labels-global">Fats (gm)</div>
+    <div class="labels-global values" [ngClass]="summary.totalValues.totalFats < limitFromSettings.fats * 0.9
+                                                 ? 'shortage'
+                                                 : (summary.totalValues.totalFats <= limitFromSettings.fats
+                                                    ? 'allGood'
+                                                    : 'overkill')">
+      {{summary.totalValues.totalFats}} / {{limitFromSettings.fats}}
+    </div>
+    <div class="labels-global">Proteins (gm)</div>
+    <div class="labels-global values" [ngClass]="summary.totalValues.totalProts < limitFromSettings.proteins * 0.9
+                                                 ? 'shortage'
+                                                 : (summary.totalValues.totalProts <= limitFromSettings.proteins
+                                                    ? 'allGood'
+                                                    : 'overkill')">
+      {{summary.totalValues.totalProts}} / {{limitFromSettings.proteins}}
+    </div>
+    <div class="labels-global">Carbohydrates (gm)</div>
+    <div class="labels-global values" [ngClass]="summary.totalValues.totalCarbs < limitFromSettings.carbs * 0.9
+                                                 ? 'shortage'
+                                                 : (summary.totalValues.totalCarbs <= limitFromSettings.carbs
+                                                    ? 'allGood'
+                                                    : 'overkill')">
+      {{summary.totalValues.totalCarbs}} / {{limitFromSettings.carbs}}
+    </div>
+    <div *ngFor="let item of summary.mealsOfDay">
+      <div *ngIf="item.isExist" class="meal-block"
+           [routerLink]="'/meal-show'"
+           [queryParams]="{
+              summary: summary | json,
+              meal: item.meal | json,
+              page: '/summary'}">
+        <div>{{item.meal.title}}</div>
+        <div class="meal-info">
+          <div>{{item.meal.kcal}}</div>
+          <div>{{item.meal.time}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

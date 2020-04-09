@@ -1,6 +1,6 @@
 <div>
   <img class="girl-global-logo" src="assets/logo.png">
-  <div class="cancel-global" [routerLink]="'/dashboard'">Back</div>
+  <div class="cancel-global" (click)="onCancel()">Back</div>
   <div class="title-global">{{meal.title}}</div>
   <div class="page-container">
     <div class="labels-global">Time</div>
