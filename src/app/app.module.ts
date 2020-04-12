@@ -15,6 +15,7 @@ import {DashboardService} from './services/dashboard.service';
 import {MealComponent} from './meal/meal.component';
 import { MealShowComponent } from './meal-show/meal-show.component';
 import { SummaryComponent } from './summary/summary.component';
+import {SummaryService} from './services/summary.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SummaryComponent } from './summary/summary.component';
     LocalStorageService,
     SettingsService,
     MealService,
-    DashboardService
+    DashboardService,
+    SummaryService
   ],
   bootstrap: [AppComponent]
 })

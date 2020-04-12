@@ -38,10 +38,8 @@
     <div *ngFor="let item of summary.mealsOfDay">
       <div *ngIf="item.isExist" class="meal-block"
            [routerLink]="'/meal-show'"
-           [queryParams]="{
-              summary: summary | json,
-              meal: item.meal | json,
-              page: '/summary'}">
+           [queryParams]="{page: '/summary'}"
+           (click)="onClick(item.meal)">
         <div>{{item.meal.title}}</div>
         <div class="meal-info">
           <div>{{item.meal.kcal}}</div>

@@ -9,6 +9,7 @@ import {SettingsService} from '../services/settings.service';
 import {ISettings} from '../interfaces/ISettings';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ISummary} from '../interfaces/ISummary';
+import {SummaryService} from '../services/summary.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -33,6 +34,7 @@ export class DashboardComponent implements OnInit {
   constructor(private dashboardService: DashboardService,
               private mealService: MealService,
               private settingsService: SettingsService,
+              private summaryService: SummaryService,
               private route: ActivatedRoute,
               private router: Router) {
     this.clearDays();
@@ -87,7 +89,6 @@ export class DashboardComponent implements OnInit {
           break;
       }
     }
-    console.log(this.totalSummary);
   }
 
   clearDays() {
@@ -150,10 +151,12 @@ export class DashboardComponent implements OnInit {
       case 5: summary.mealsOfDay = this.saturday; break;
       case 6: summary.mealsOfDay = this.sunday; break;
     }
-    this.router.navigate(['/summary'], {
-      queryParams: {
-        summary: JSON.stringify(summary)
-      }
-    });
+    // this.router.navigate(['/summary'], {
+    //   queryParams: {
+    //     summary: JSON.stringify(summary)
+    //   }
+    // });
+    this.summaryService.selectedSummary = summary;
+    this.router.navigate(['/summary']);
   }
 }

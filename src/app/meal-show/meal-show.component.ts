@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IMeal} from '../interfaces/IMeal';
 import {ISummary} from '../interfaces/ISummary';
+import {MealService} from '../services/meal.service';
 
 @Component({
   selector: 'app-meal-show',
@@ -11,30 +12,24 @@ import {ISummary} from '../interfaces/ISummary';
 export class MealShowComponent implements OnInit {
   meal: IMeal;
   summary: ISummary;
+  imgURL: any;
   previousPage = '/dashboard';
   constructor(private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private mealService: MealService) {
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
-      this.meal = JSON.parse(params.meal);
       this.previousPage = params.page;
-      this.summary = JSON.parse(params.summary);
     });
-
-    // this.meal = JSON.parse(this.route.snapshot['queryParams'].meal) as IMeal;
+    this.meal = this.mealService.selectedMeal;
+    this.imgURL = (this.meal.photoPath === '' || this.meal.photoPath === undefined)
+      ? 'assets/Rectangle.png'
+      : this.meal.photoPath;
   }
 
   onCancel() {
-    if (this.previousPage === '/summary') {
-      this.router.navigate(['/summary'], {
-        queryParams: {
-          summary: JSON.stringify(this.summary)
-        }
-      });
-    }
-    if (this.previousPage === '/dashboard') {
-      this.router.navigate(['/dashboard']);
-    }
+    this.router.navigate([this.previousPage]);
   }
 }

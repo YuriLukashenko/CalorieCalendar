@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IMeal} from '../interfaces/IMeal';
+import {MealService} from '../services/meal.service';
 
 @Component({
   selector: 'app-meal',
@@ -9,9 +10,12 @@ import {IMeal} from '../interfaces/IMeal';
 export class MealComponent implements OnInit {
   @Input() meal: IMeal;
   @Input() isExist: boolean;
-  constructor() { }
+  constructor(private mealService: MealService) { }
 
   ngOnInit(): void {
   }
 
+  onClick() {
+    this.mealService.selectedMeal = this.meal;
+  }
 }

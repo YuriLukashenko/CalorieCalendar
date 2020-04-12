@@ -7,14 +7,21 @@ import {DashboardService} from './dashboard.service';
 @Injectable()
 export class MealService {
   private _mealCount: number;
+  private _selectedMeal: IMeal;
+
+  get selectedMeal() {
+    return this._selectedMeal;
+  }
+
+  set selectedMeal(selected: IMeal) {
+    this._selectedMeal = selected;
+  }
 
   constructor(private localStorageService: LocalStorageService, private dashboardService: DashboardService) {
     const tempMealCount = this.localStorageService.itemFromLocalStorage('mealCount');
     this._mealCount = tempMealCount != null ? tempMealCount : 0;
 
-    let now = moment();
-    console.log(now.format());
-    console.log(now.add(-7, 'months').format());
+    const now = moment();
   }
 
    getDefaultMeal(): IMeal {
@@ -27,8 +34,8 @@ export class MealService {
       dayOfWeek: moment().format('dddd'),
       carbs: null,
       fats: null,
-      photoPath: '',
-      proteins: null
+      proteins: null,
+      photoPath: null
     };
   }
 
@@ -58,7 +65,6 @@ export class MealService {
   }
 
   getAllMealsForCurrentWeek(): IMeal[] {
-    console.log(this.dashboardService.lastDay, this.dashboardService.firstDay);
     const allMeals: IMeal[] = [];
     for (let i = 1; i <= this.mealCount; i++) {
       const item = this.localStorageService.itemFromLocalStorage('meal_' + i);

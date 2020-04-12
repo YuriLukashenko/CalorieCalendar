@@ -1,4 +1,7 @@
-<div class="mealContainer" *ngIf="isExist" [routerLink]="'/meal-show'" [queryParams]="{meal: meal | json, page: '/dashboard'}">
+<div class="mealContainer"
+     *ngIf="isExist"
+     [routerLink]="'/meal-show'"
+     [queryParams]="{page: '/dashboard'}" (click)="onClick()">
   <div class="title">{{meal?.title}}</div>
   <div class="calories">{{meal?.kcal}}</div>
 </div>

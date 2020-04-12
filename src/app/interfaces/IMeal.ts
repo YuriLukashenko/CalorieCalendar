@@ -8,5 +8,5 @@ export interface IMeal {
   fats: number;
   proteins: number;
   carbs: number;
-  photoPath: string;
+  photoPath: any;
 }
