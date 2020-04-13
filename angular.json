@@ -63,9 +63,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "CalorieCalendar:build",
-            "sslKey":  "./server.key",
-            "sslCert": "./server.crt"
+            "browserTarget": "CalorieCalendar:build"
           },
           "configurations": {
             "production": {

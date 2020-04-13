@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
               private router: Router) {
     this.clearDays();
     this.currentMonthName = moment().format('MMMM');
-    this.currentDayNum = +moment().format('D');
+    this.currentDayNum = +moment().add(-7, 'days').format('D');
   }
 
   ngOnInit(): void {

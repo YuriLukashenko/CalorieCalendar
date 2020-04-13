@@ -25,28 +25,28 @@ export class DashboardService {
   getCurrentWeek(): {day: number, month: string}[] {
     let weekNums: {day: number, month: string}[] = [];
     let dayOfWeek = moment().format('dddd');
-    let now: moment.Moment;
+    const now = moment().add(-7, 'days');
     switch (dayOfWeek) {
       case 'Monday':
-        now = moment().add(-1, 'days');
+        now.add(-1, 'days');
         break;
       case 'Tuesday':
-        now = moment().add(-2, 'days');
+        now.add(-2, 'days');
         break;
       case 'Wednesday':
-        now = moment().add(-3, 'days');
+        now.add(-3, 'days');
         break;
       case 'Thursday':
-        now = moment().add(-4, 'days');
+        now.add(-4, 'days');
         break;
       case 'Friday':
-        now = moment().add(-5, 'days');
+        now.add(-5, 'days');
         break;
       case 'Saturday':
-        now = moment().add(-6, 'days');
+        now.add(-6, 'days');
         break;
       case 'Sunday':
-        now = moment().add(-7, 'days');
+        now.add(-7, 'days');
         break;
     }
     for (let i = 0; i < 7; i++) {

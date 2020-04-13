@@ -30,7 +30,7 @@ export class MealService {
       title: '',
       kcal: null,
       time: null,
-      date: new Date().toJSON().slice(0, 10),
+      date:  moment().add(-7, 'days').format('YYYY-MM-DD'),
       dayOfWeek: moment().format('dddd'),
       carbs: null,
       fats: null,

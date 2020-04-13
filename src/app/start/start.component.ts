@@ -19,12 +19,12 @@ export class StartComponent implements OnInit {
   ngOnInit(): void {
     this.user = null;
     this.loggedIn = false;
-    this.route.queryParams.subscribe((params) => {
-      console.log(params);
-      if (params?.page === 'setting') {
-        this.onSignOut();
-      }
-    });
+    // this.route.queryParams.subscribe((params) => {
+    //   console.log(params);
+    //   if (params?.page === 'setting') {
+    //     this.onSignOut();
+    //   }
+    // });
   }
 
   onSignIn() {
@@ -38,6 +38,10 @@ export class StartComponent implements OnInit {
         this.router.navigate(['/dashboard']);
       }
     });
+  }
+
+  withoutSignIn() {
+    this.router.navigate(['/dashboard']);
   }
 
   onSignOut() {
