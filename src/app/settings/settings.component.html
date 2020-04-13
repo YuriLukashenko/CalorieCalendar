@@ -1,8 +1,15 @@
 <div>
   <img class="girl-global-logo" src="assets/logo.png">
-  <div class="cancel-global" [routerLink]="'/dashboard'">Cancel</div>
-  <div class="title-global">Personal settings</div>
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="cancel-global" [routerLink]="'/dashboard'">Cancel</div>
+    <button class="btn btn-primary button-global-style sign-out-global"
+            *ngIf="personalSettings.isLoggedIn"
+            [routerLink]="'/start'"
+            [queryParams]="{page: 'setting'}">Sign out</button>
+  </div>
+  <div class="title-global m-2">Personal settings</div>
   <div class="page-container">
+    <div class="labels-global user-name" *ngIf="personalSettings.isLoggedIn">{{personalSettings.user.name}}</div>
     <div class="labels-global">Gender</div>
     <div class="radioButtonWrapped">
       <label class="radioButtonContainer font-weight-bold">Male
@@ -29,10 +36,16 @@
         <input type="text" class="text-input-global" [value]="personalSettings.maxKcal" readonly>
       </div>
     </div>
-    <div class="labels-global">Fats (gm)</div>
-    <input type="text" class="text-input-global" [value]="personalSettings.fats" readonly>
-    <div class="labels-global">Proteins (gm)</div>
-    <input type="text" class="text-input-global" [value]="personalSettings.proteins" readonly>
+    <div class="d-flex justify-content-between">
+      <div>
+        <div class="labels-global">Fats (gm)</div>
+        <input type="text" class="text-input-global" [value]="personalSettings.fats" readonly>
+      </div>
+      <div class="ml-4">
+        <div class="labels-global">Proteins (gm)</div>
+        <input type="text" class="text-input-global" [value]="personalSettings.proteins" readonly>
+      </div>
+    </div>
     <div class="labels-global">Carbohydrates (gm)</div>
     <input type="text" class="text-input-global" [value]="personalSettings.carbs" readonly>
     <div class="d-flex justify-content-center">

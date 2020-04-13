@@ -8,7 +8,10 @@ import {MealShowComponent} from './meal-show/meal-show.component';
 import {SummaryComponent} from './summary/summary.component';
 
 const appRoutes: Routes = [
-  {path: '', component: StartComponent},
+  {path: '', component:
+          localStorage.getItem('setting') === null ? StartComponent :
+          JSON.parse(localStorage.getItem('setting')).isLoggedIn ? DashboardComponent : StartComponent},
+  {path: 'start', component: StartComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'settings', component: SettingsComponent},
   {path: 'new-meal', component: NewMealComponent},
@@ -22,4 +25,5 @@ const appRoutes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

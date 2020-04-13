@@ -1,3 +1,5 @@
+import {SocialUser} from 'angularx-social-login';
+
 export interface ISettings {
   isMale: boolean;
   weight: number;
@@ -7,4 +9,6 @@ export interface ISettings {
   fats: number;
   proteins: number;
   carbs: number;
+  user: SocialUser;
+  isLoggedIn: boolean;
 }

@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {SettingsService} from '../services/settings.service';
 import {ISettings} from '../interfaces/ISettings';
+import {AuthService} from 'angularx-social-login';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -9,7 +11,9 @@ import {ISettings} from '../interfaces/ISettings';
 })
 export class SettingsComponent implements OnInit {
   personalSettings: ISettings;
-  constructor(private settingsService: SettingsService) { }
+  constructor(private settingsService: SettingsService,
+              private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.personalSettings = this.settingsService.setting;
@@ -31,6 +35,4 @@ export class SettingsComponent implements OnInit {
     console.log(this.personalSettings);
     this.settingsService.setting = this.personalSettings;
   }
-
-
 }

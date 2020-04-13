@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ISettings} from '../interfaces/ISettings';
 import {LocalStorageService} from './local-storage.service';
+import {SocialUser} from 'angularx-social-login';
 
 @Injectable()
 export class SettingsService {
@@ -9,7 +10,6 @@ export class SettingsService {
   constructor(private localStorageService: LocalStorageService) {
     const tempSetting = this.localStorageService.itemFromLocalStorage('setting');
     this.setting = tempSetting != null ? tempSetting : this.setDefaults();
-    console.log(this.setting);
   }
 
   setDefaults() {
@@ -21,7 +21,9 @@ export class SettingsService {
       maxKcal: 1833,
       fats: 73,
       proteins: 462,
-      carbs: 505
+      carbs: 505,
+      user: null,
+      isLoggedIn: false
     };
   }
 
@@ -32,6 +34,12 @@ export class SettingsService {
   set setting(setting: ISettings) {
     this._setting = setting;
     this.localStorageService.itemToLocalStorage(setting, 'setting');
+  }
+
+  setUser(user: SocialUser, isLoggedIn: boolean) {
+    this.setting.user = user;
+    this.setting.isLoggedIn = isLoggedIn;
+    this.localStorageService.itemToLocalStorage(this.setting, 'setting');
   }
 
   calculateCalories(): ISettings {

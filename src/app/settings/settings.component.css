@@ -11,5 +11,11 @@ div{
   justify-content: flex-start;
 }
 
+.user-name{
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
 
 

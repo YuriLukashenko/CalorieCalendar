@@ -71,6 +71,14 @@
   outline: none;
 }
 
+.sign-out-global{
+  font-family: Roboto Condensed;
+  margin: 5px 10px 0 0;
+  font-size: 16px;
+  line-height: 18px;
+  outline: none;
+}
+
 .title-global{
   font-size: 28px;
   line-height: 28px;

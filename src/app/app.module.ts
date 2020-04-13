@@ -15,7 +15,19 @@ import {DashboardService} from './services/dashboard.service';
 import {MealComponent} from './meal/meal.component';
 import { MealShowComponent } from './meal-show/meal-show.component';
 import { SummaryComponent } from './summary/summary.component';
-import {SummaryService} from './services/summary.service';
+import { SummaryService } from './services/summary.service';
+import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider} from 'angularx-social-login';
+
+const config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider('240038365999-1m2nsvo8ejhs5g54od55b9n3ljm7qga2.apps.googleusercontent.com')
+  }
+]);
+
+export function provideConfig() {
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -31,15 +43,21 @@ import {SummaryService} from './services/summary.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    SocialLoginModule
   ],
   providers: [
     LocalStorageService,
     SettingsService,
     MealService,
     DashboardService,
-    SummaryService
+    SummaryService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
