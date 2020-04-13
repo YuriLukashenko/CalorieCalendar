@@ -17,6 +17,8 @@ import { MealShowComponent } from './meal-show/meal-show.component';
 import { SummaryComponent } from './summary/summary.component';
 import { SummaryService } from './services/summary.service';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider} from 'angularx-social-login';
+import {AuthCalorieService} from './services/auth-calorie.service';
+import {AuthGuard} from './services/auth-guard.service';
 
 const config = new AuthServiceConfig([
   {
@@ -55,7 +57,9 @@ export function provideConfig() {
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig
-    }
+    },
+    AuthCalorieService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

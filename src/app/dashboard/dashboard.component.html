@@ -36,7 +36,7 @@
     <div class="time">20:00</div>
   </div>
   <div class="container">
-    <div class="d-flex flex-row">
+    <div class="d-flex flex-row header">
       <div class="totalCalories" *ngFor="let total of totalSummary">
         <div [ngClass]="total.totalKcal < setting.minKcal
                                                  ? 'shortage'

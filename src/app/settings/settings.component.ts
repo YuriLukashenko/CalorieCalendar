@@ -11,9 +11,7 @@ import {Router} from '@angular/router';
 })
 export class SettingsComponent implements OnInit {
   personalSettings: ISettings;
-  constructor(private settingsService: SettingsService,
-              private authService: AuthService,
-              private router: Router) { }
+  constructor(private settingsService: SettingsService) { }
 
   ngOnInit(): void {
     this.personalSettings = this.settingsService.setting;

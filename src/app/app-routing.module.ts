@@ -6,17 +6,16 @@ import {SettingsComponent} from './settings/settings.component';
 import {NewMealComponent} from './new-meal/new-meal.component';
 import {MealShowComponent} from './meal-show/meal-show.component';
 import {SummaryComponent} from './summary/summary.component';
+import {AuthGuard} from './services/auth-guard.service';
 
 const appRoutes: Routes = [
-  {path: '', component:
-          localStorage.getItem('setting') === null ? StartComponent :
-          JSON.parse(localStorage.getItem('setting')).isLoggedIn ? DashboardComponent : StartComponent},
+  {path: '', component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'start', component: StartComponent},
-  {path: 'dashboard', component: DashboardComponent},
-  {path: 'settings', component: SettingsComponent},
-  {path: 'new-meal', component: NewMealComponent},
-  {path: 'meal-show', component: MealShowComponent},
-  {path: 'summary', component: SummaryComponent}
+  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
+  {path: 'new-meal', component: NewMealComponent, canActivate: [AuthGuard]},
+  {path: 'meal-show', component: MealShowComponent, canActivate: [AuthGuard]},
+  {path: 'summary', component: SummaryComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

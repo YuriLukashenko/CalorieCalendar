@@ -100,3 +100,7 @@
   padding: 0 5px;
 }
 
+.header{
+  min-height: 33px;
+}
+
