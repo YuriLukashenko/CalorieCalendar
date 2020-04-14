@@ -20,15 +20,17 @@ export class AuthCalorieService {
   }
 
   logIn() {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(user => {
-      console.log(user);
-      this.user = user;
-      this.isLoggedIn = (user != null);
-      this.settingsService.setUser(this.user, this.isLoggedIn);
-      if (this.isLoggedIn) {
-        this.router.navigate(['/dashboard']);
-      }
-    });
+    // this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(user => {
+    //   console.log(user);
+    //   this.user = user;
+    //   this.isLoggedIn = (user != null);
+    //   this.settingsService.setUser(this.user, this.isLoggedIn);
+    //   if (this.isLoggedIn) {
+    //     this.router.navigate(['/dashboard']);
+    //   }
+    // });
+    this.isLoggedIn = true;
+    this.router.navigate(['/dashboard']);
   }
 
   logOut() {
