@@ -11,9 +11,9 @@
 }
 
 .selectMonth{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
   font-size: 14px;
   font-family: Roboto Condensed;
   border: none;
@@ -69,7 +69,7 @@
 }
 
 .dayBlock{
-  height: 85vh;
+  height: 78vh;
 }
 
 .ellipse{
@@ -107,16 +107,19 @@
 .weekSwiper{
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: left;
   margin-top: 10px;
 }
 
 .arrowRight{
   width: 10%;
+  height: 10%;
+  margin-left: 20px;
 }
 
 .arrowLeft{
   width: 10%;
+  height: 10%;
   transform: rotate(180deg);
 }
 

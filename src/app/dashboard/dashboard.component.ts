@@ -116,8 +116,8 @@ export class DashboardComponent implements OnInit {
       totalProts: 0,
       totalCarbs: 0
     };
-    // 12 parts of day from 08:00 to 20:00
-    for (let i = 0; i < 12; i++) {
+    // 11 parts of day from 08:00 to 19:00
+    for (let i = 0; i < 11; i++) {
       this.monday.push(Object.assign({}, defaultDay));
       this.tuesday.push(Object.assign({}, defaultDay));
       this.wednesday.push(Object.assign({}, defaultDay));
@@ -134,7 +134,7 @@ export class DashboardComponent implements OnInit {
 
   private getMealOffset(meal: IMeal): number {
     const hours = + meal?.time.split(':')[0] ?? 0;
-    if (hours < 8 && hours > 19) {
+    if (hours < 8 || hours > 18) {
       return -1;
     } else {
       return hours - 8;
