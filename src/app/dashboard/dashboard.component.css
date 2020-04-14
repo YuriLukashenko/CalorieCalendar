@@ -1,6 +1,6 @@
 .leftBlock{
   float: left;
-  width: 25%;
+  width: 20%;
 }
 
 .gearLogo{
@@ -64,7 +64,7 @@
   float: top;
   flex-basis: 0;
   flex-grow: 1;
-  width: 10vw;
+  width: 11vw;
   border: 1px solid #D8D5D5;
 }
 
@@ -102,5 +102,25 @@
 
 .header{
   min-height: 33px;
+}
+
+.weekSwiper{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.arrowRight{
+  width: 10%;
+}
+
+.arrowLeft{
+  width: 10%;
+  transform: rotate(180deg);
+}
+
+.pr3p{
+  padding-right: 3%;
 }
 

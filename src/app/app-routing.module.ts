@@ -15,7 +15,8 @@ const appRoutes: Routes = [
   {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
   {path: 'new-meal', component: NewMealComponent, canActivate: [AuthGuard]},
   {path: 'meal-show', component: MealShowComponent, canActivate: [AuthGuard]},
-  {path: 'summary', component: SummaryComponent, canActivate: [AuthGuard]}
+  {path: 'summary', component: SummaryComponent, canActivate: [AuthGuard]},
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({

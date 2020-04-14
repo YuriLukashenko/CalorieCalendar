@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit {
   sunday: IDay[] = [];
   totalSummary: ITotal[] = [];
   setting: ISettings;
+  monthName: string;
 
   constructor(private dashboardService: DashboardService,
               private mealService: MealService,
@@ -42,8 +43,9 @@ export class DashboardComponent implements OnInit {
     this.currentDayNum = +moment().format('D');
   }
 
-  ngOnInit(): void {
+  private loadDashboard() {
     this.week = this.dashboardService.getCurrentWeek();
+    this.monthName = this.dashboardService.monthName;
     this.meals = this.mealService.getAllMealsForCurrentWeek();
     this.setting = this.settingsService.setting;
 
@@ -91,7 +93,19 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  ngOnInit(): void {
+    this.loadDashboard();
+  }
+
   clearDays() {
+    this.monday.splice(0, this.monday.length);
+    this.tuesday.splice(0, this.tuesday.length);
+    this.wednesday.splice(0, this.wednesday.length);
+    this.thursday.splice(0, this.thursday.length);
+    this.friday.splice(0, this.friday.length);
+    this.saturday.splice(0, this.saturday.length);
+    this.sunday.splice(0, this.sunday.length);
+    this.totalSummary.splice(0, this.totalSummary.length);
     const defaultDay: IDay = {
       meal: null,
       isExist: false,
@@ -136,7 +150,7 @@ export class DashboardComponent implements OnInit {
 
   onSelectDay(index: number) {
     const summary: ISummary = {
-      title: this.week[index].day === this.currentDayNum
+      title: (this.week[index].day === this.currentDayNum && this.week[index].month === this.currentMonthName)
         ? 'Today'
         : this.week[index].month + ' ' + this.week[index].day,
       totalValues: this.totalSummary[index],
@@ -151,12 +165,19 @@ export class DashboardComponent implements OnInit {
       case 5: summary.mealsOfDay = this.saturday; break;
       case 6: summary.mealsOfDay = this.sunday; break;
     }
-    // this.router.navigate(['/summary'], {
-    //   queryParams: {
-    //     summary: JSON.stringify(summary)
-    //   }
-    // });
     this.summaryService.selectedSummary = summary;
     this.router.navigate(['/summary']);
+  }
+
+  onArrowRight() {
+    this.dashboardService.weekInc();
+    this.clearDays();
+    this.loadDashboard();
+  }
+
+  onArrowLeft() {
+    this.dashboardService.weekDec();
+    this.clearDays();
+    this.loadDashboard();
   }
 }
